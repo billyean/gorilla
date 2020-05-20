@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package calculator;
+
+option go_package = "calculatorpb";
+
+
+message CalRequest {
+    int32 operand1 = 1;
+    int32 operand2 = 2;
+    enum Operator {
+      ADD = 0;
+      MINUS = 1;
+      TIMES = 2;
+      DIVIDE = 3;
+      MOD = 4;
+    }
+    Operator operator = 3;
+}
+
+message CalResponse {
+  int32 result = 1;
+}
+
+service CalculateService{
+  // Unary
+  rpc Calculate(CalRequest) returns (CalResponse) {};
+}

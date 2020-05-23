@@ -7,6 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net"
+	"time"
 )
 
 type server struct{}
@@ -31,6 +32,32 @@ func (*server) Calculate(ctx context.Context, req *calculatorpb.CalRequest) (*ca
 	}
 	return res, nil
 }
+
+func (*server)  FibonacciNumber(req *calculatorpb.FibonacciRequest, stream calculatorpb.CalculateService_FibonacciNumberServer) error {
+	var firstNumber = req.GetFirstNumber()
+	var secondNumber = req.GetSecondNumber()
+	var n int32 = 0
+
+	var result int64
+
+	for {
+		n += 1
+		result = firstNumber + secondNumber
+		fmt.Printf("Calling %d + %d = %d\n", firstNumber, secondNumber, result)
+		response := &calculatorpb.FibonacciResponse{
+			Result: result,
+			N: n,
+		}
+		stream.Send(response)
+		time.Sleep(200 * time.Millisecond)
+		firstNumber = secondNumber
+		secondNumber = result
+	}
+
+
+	return nil
+}
+
 
 func main() {
 	listener, err := net.Listen("tcp", "0.0.0.0:50052")

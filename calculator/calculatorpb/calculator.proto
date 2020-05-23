@@ -22,7 +22,19 @@ message CalResponse {
   int32 result = 1;
 }
 
+message FibonacciRequest {
+  int64 first_number = 1;
+  int64 second_number = 2;
+}
+
+message FibonacciResponse {
+  int64 result = 1;
+  int32 n = 2;
+}
+
 service CalculateService{
   // Unary
   rpc Calculate(CalRequest) returns (CalResponse) {};
+
+  rpc FibonacciNumber(FibonacciRequest) returns (stream FibonacciResponse) {};
 }

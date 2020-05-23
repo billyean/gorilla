@@ -194,6 +194,116 @@ func (x *CalResponse) GetResult() int32 {
 	return 0
 }
 
+type FibonacciRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	FirstNumber  int64 `protobuf:"varint,1,opt,name=first_number,json=firstNumber,proto3" json:"first_number,omitempty"`
+	SecondNumber int64 `protobuf:"varint,2,opt,name=second_number,json=secondNumber,proto3" json:"second_number,omitempty"`
+}
+
+func (x *FibonacciRequest) Reset() {
+	*x = FibonacciRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_calculator_calculatorpb_calculator_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FibonacciRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FibonacciRequest) ProtoMessage() {}
+
+func (x *FibonacciRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_calculator_calculatorpb_calculator_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FibonacciRequest.ProtoReflect.Descriptor instead.
+func (*FibonacciRequest) Descriptor() ([]byte, []int) {
+	return file_calculator_calculatorpb_calculator_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *FibonacciRequest) GetFirstNumber() int64 {
+	if x != nil {
+		return x.FirstNumber
+	}
+	return 0
+}
+
+func (x *FibonacciRequest) GetSecondNumber() int64 {
+	if x != nil {
+		return x.SecondNumber
+	}
+	return 0
+}
+
+type FibonacciResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Result int64 `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	N      int32 `protobuf:"varint,2,opt,name=n,proto3" json:"n,omitempty"`
+}
+
+func (x *FibonacciResponse) Reset() {
+	*x = FibonacciResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_calculator_calculatorpb_calculator_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FibonacciResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FibonacciResponse) ProtoMessage() {}
+
+func (x *FibonacciResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_calculator_calculatorpb_calculator_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FibonacciResponse.ProtoReflect.Descriptor instead.
+func (*FibonacciResponse) Descriptor() ([]byte, []int) {
+	return file_calculator_calculatorpb_calculator_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *FibonacciResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+func (x *FibonacciResponse) GetN() int32 {
+	if x != nil {
+		return x.N
+	}
+	return 0
+}
+
 var File_calculator_calculatorpb_calculator_proto protoreflect.FileDescriptor
 
 var file_calculator_calculatorpb_calculator_proto_rawDesc = []byte{
@@ -215,13 +325,28 @@ var file_calculator_calculatorpb_calculator_proto_rawDesc = []byte{
 	0x03, 0x12, 0x07, 0x0a, 0x03, 0x4d, 0x4f, 0x44, 0x10, 0x04, 0x22, 0x25, 0x0a, 0x0b, 0x43, 0x61,
 	0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73,
 	0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x32, 0x52, 0x0a, 0x10, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x3e, 0x0a, 0x09, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61,
-	0x74, 0x65, 0x12, 0x16, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e,
-	0x43, 0x61, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x17, 0x2e, 0x63, 0x61, 0x6c,
-	0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x43, 0x61, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x0e, 0x5a, 0x0c, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61,
-	0x74, 0x6f, 0x72, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x22, 0x5a, 0x0a, 0x10, 0x46, 0x69, 0x62, 0x6f, 0x6e, 0x61, 0x63, 0x63, 0x69, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x66, 0x69, 0x72, 0x73, 0x74, 0x5f, 0x6e,
+	0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x66, 0x69, 0x72,
+	0x73, 0x74, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x23, 0x0a, 0x0d, 0x73, 0x65, 0x63, 0x6f,
+	0x6e, 0x64, 0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x0c, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22, 0x39, 0x0a,
+	0x11, 0x46, 0x69, 0x62, 0x6f, 0x6e, 0x61, 0x63, 0x63, 0x69, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x03, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x0c, 0x0a, 0x01, 0x6e, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x01, 0x6e, 0x32, 0xa6, 0x01, 0x0a, 0x10, 0x43, 0x61, 0x6c,
+	0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x3e, 0x0a,
+	0x09, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x12, 0x16, 0x2e, 0x63, 0x61, 0x6c,
+	0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x43, 0x61, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x17, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e,
+	0x43, 0x61, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x52, 0x0a,
+	0x0f, 0x46, 0x69, 0x62, 0x6f, 0x6e, 0x61, 0x63, 0x63, 0x69, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72,
+	0x12, 0x1c, 0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x46, 0x69,
+	0x62, 0x6f, 0x6e, 0x61, 0x63, 0x63, 0x69, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d,
+	0x2e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x46, 0x69, 0x62, 0x6f,
+	0x6e, 0x61, 0x63, 0x63, 0x69, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30,
+	0x01, 0x42, 0x0e, 0x5a, 0x0c, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x70,
+	0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -237,18 +362,22 @@ func file_calculator_calculatorpb_calculator_proto_rawDescGZIP() []byte {
 }
 
 var file_calculator_calculatorpb_calculator_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_calculator_calculatorpb_calculator_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_calculator_calculatorpb_calculator_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_calculator_calculatorpb_calculator_proto_goTypes = []interface{}{
-	(CalRequest_Operator)(0), // 0: calculator.CalRequest.Operator
-	(*CalRequest)(nil),       // 1: calculator.CalRequest
-	(*CalResponse)(nil),      // 2: calculator.CalResponse
+	(CalRequest_Operator)(0),  // 0: calculator.CalRequest.Operator
+	(*CalRequest)(nil),        // 1: calculator.CalRequest
+	(*CalResponse)(nil),       // 2: calculator.CalResponse
+	(*FibonacciRequest)(nil),  // 3: calculator.FibonacciRequest
+	(*FibonacciResponse)(nil), // 4: calculator.FibonacciResponse
 }
 var file_calculator_calculatorpb_calculator_proto_depIdxs = []int32{
 	0, // 0: calculator.CalRequest.operator:type_name -> calculator.CalRequest.Operator
 	1, // 1: calculator.CalculateService.Calculate:input_type -> calculator.CalRequest
-	2, // 2: calculator.CalculateService.Calculate:output_type -> calculator.CalResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
+	3, // 2: calculator.CalculateService.FibonacciNumber:input_type -> calculator.FibonacciRequest
+	2, // 3: calculator.CalculateService.Calculate:output_type -> calculator.CalResponse
+	4, // 4: calculator.CalculateService.FibonacciNumber:output_type -> calculator.FibonacciResponse
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -284,6 +413,30 @@ func file_calculator_calculatorpb_calculator_proto_init() {
 				return nil
 			}
 		}
+		file_calculator_calculatorpb_calculator_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FibonacciRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_calculator_calculatorpb_calculator_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FibonacciResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -291,7 +444,7 @@ func file_calculator_calculatorpb_calculator_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_calculator_calculatorpb_calculator_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -320,6 +473,7 @@ const _ = grpc.SupportPackageIsVersion6
 type CalculateServiceClient interface {
 	// Unary
 	Calculate(ctx context.Context, in *CalRequest, opts ...grpc.CallOption) (*CalResponse, error)
+	FibonacciNumber(ctx context.Context, in *FibonacciRequest, opts ...grpc.CallOption) (CalculateService_FibonacciNumberClient, error)
 }
 
 type calculateServiceClient struct {
@@ -339,10 +493,43 @@ func (c *calculateServiceClient) Calculate(ctx context.Context, in *CalRequest, 
 	return out, nil
 }
 
+func (c *calculateServiceClient) FibonacciNumber(ctx context.Context, in *FibonacciRequest, opts ...grpc.CallOption) (CalculateService_FibonacciNumberClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_CalculateService_serviceDesc.Streams[0], "/calculator.CalculateService/FibonacciNumber", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &calculateServiceFibonacciNumberClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type CalculateService_FibonacciNumberClient interface {
+	Recv() (*FibonacciResponse, error)
+	grpc.ClientStream
+}
+
+type calculateServiceFibonacciNumberClient struct {
+	grpc.ClientStream
+}
+
+func (x *calculateServiceFibonacciNumberClient) Recv() (*FibonacciResponse, error) {
+	m := new(FibonacciResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CalculateServiceServer is the server API for CalculateService service.
 type CalculateServiceServer interface {
 	// Unary
 	Calculate(context.Context, *CalRequest) (*CalResponse, error)
+	FibonacciNumber(*FibonacciRequest, CalculateService_FibonacciNumberServer) error
 }
 
 // UnimplementedCalculateServiceServer can be embedded to have forward compatible implementations.
@@ -351,6 +538,9 @@ type UnimplementedCalculateServiceServer struct {
 
 func (*UnimplementedCalculateServiceServer) Calculate(context.Context, *CalRequest) (*CalResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Calculate not implemented")
+}
+func (*UnimplementedCalculateServiceServer) FibonacciNumber(*FibonacciRequest, CalculateService_FibonacciNumberServer) error {
+	return status.Errorf(codes.Unimplemented, "method FibonacciNumber not implemented")
 }
 
 func RegisterCalculateServiceServer(s *grpc.Server, srv CalculateServiceServer) {
@@ -375,6 +565,27 @@ func _CalculateService_Calculate_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CalculateService_FibonacciNumber_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(FibonacciRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CalculateServiceServer).FibonacciNumber(m, &calculateServiceFibonacciNumberServer{stream})
+}
+
+type CalculateService_FibonacciNumberServer interface {
+	Send(*FibonacciResponse) error
+	grpc.ServerStream
+}
+
+type calculateServiceFibonacciNumberServer struct {
+	grpc.ServerStream
+}
+
+func (x *calculateServiceFibonacciNumberServer) Send(m *FibonacciResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 var _CalculateService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "calculator.CalculateService",
 	HandlerType: (*CalculateServiceServer)(nil),
@@ -384,6 +595,12 @@ var _CalculateService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _CalculateService_Calculate_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "FibonacciNumber",
+			Handler:       _CalculateService_FibonacciNumber_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "calculator/calculatorpb/calculator.proto",
 }

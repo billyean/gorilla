@@ -22,6 +22,7 @@ func doServerRequest(c greetpb.GreetServiceClient) {
 	}
 	fmt.Printf("get response message : '%v'", response.Result)
 }
+
 func doServerStreaming(c greetpb.GreetServiceClient) {
 	request := &greetpb.GreetManyTimesRequest{
 		Greeting: &greetpb.Greeting{

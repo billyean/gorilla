@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/billyean/tornado/greet/greetpb"
 	"google.golang.org/grpc"
+	"io"
 	"log"
 	"net"
 	"strconv"
@@ -33,6 +34,26 @@ func (*server) GreetManyTimes(req *greetpb.GreetManyTimesRequest, stream greetpb
 		}
 		stream.Send(response)
 		time.Sleep(2000 * time.Millisecond)
+	}
+
+	return nil
+}
+
+func (*server) LongGreet(stream greetpb.GreetService_LongGreetServer) error {
+	fmt.Printf("LongGreet is invoked with %v\n", stream)
+	result := ""
+	for {
+		resp, err := stream.Recv()
+		if err == io.EOF {
+			response := &greetpb.LongGreetResponse {
+				Result: result,
+			}
+			return stream.SendAndClose(response)
+		}
+		if err != nil {
+			fmt.Printf("Error happened in recving data: %v\n", err)
+		}
+		result += "\nHello , " + resp.GetGreeting().GetFirstName() + " " + resp.GetGreeting().GetLastName() + " !"
 	}
 
 	return nil

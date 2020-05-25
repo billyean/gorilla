@@ -7,6 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"io"
 	"log"
+	"time"
 )
 
 func doServerRequest(c greetpb.GreetServiceClient) {
@@ -47,8 +48,62 @@ func doServerStreaming(c greetpb.GreetServiceClient) {
 		}
 		fmt.Printf("get response message : '%v'\n", response.Result)
 	}
-
 }
+
+func doClientStreaming(c greetpb.GreetServiceClient) {
+	requests := []*greetpb.LongGreetRequest{
+		&greetpb.LongGreetRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Haibo",
+				LastName:  "Yan",
+			},
+		},
+		&greetpb.LongGreetRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Tina",
+				LastName:  "Luo",
+			},
+		},
+		&greetpb.LongGreetRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Yan",
+				LastName:  "Li",
+			},
+		},
+		&greetpb.LongGreetRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Zachary",
+				LastName:  "Stephen",
+			},
+		},
+		&greetpb.LongGreetRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Tristan",
+				LastName:  "Timerlake",
+			},
+		},
+	}
+
+	stream, err :=  c.LongGreet(context.Background())
+	if err != nil {
+		log.Fatalf(" with error: %v", err)
+	}
+
+	for _, request := range requests {
+		stream.Send(request)
+		time.Sleep(100 * time.Millisecond)
+	}
+
+	res, err := stream.CloseAndRecv()
+	if err != nil {
+		if err != nil {
+			log.Fatalf("Recv response with error: %v\n", err)
+		}
+	}
+	fmt.Printf("get response message : '%v'\n", res.GetResult())
+}
+
+
 
 func main() {
 	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
@@ -61,5 +116,5 @@ func main() {
 
 	c := greetpb.NewGreetServiceClient(conn)
 
-	doServerStreaming(c)
+	doClientStreaming(c)
 }

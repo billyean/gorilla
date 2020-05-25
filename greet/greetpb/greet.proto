@@ -25,9 +25,19 @@ message GrretManyTimesReponse {
   string result = 1;
 }
 
+message LongGreetRequest {
+  Greeting greeting = 1;
+}
+
+message LongGreetResponse {
+  string result = 1;
+}
+
 service GreetService{
   // Unary
   rpc Greet(GreetRequest) returns (GreetResponse) {};
 
   rpc GreetManyTimes(GreetManyTimesRequest) returns (stream GrretManyTimesReponse) {}
+
+  rpc LongGreet(stream LongGreetRequest) returns (LongGreetResponse) {}
 }

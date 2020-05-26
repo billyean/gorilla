@@ -103,6 +103,57 @@ func doClientStreaming(c greetpb.GreetServiceClient) {
 	fmt.Printf("get response message : '%v'\n", res.GetResult())
 }
 
+func doBiDirectional(c greetpb.GreetServiceClient) {
+	requests := []*greetpb.GreetEveryoneRequest{
+		&greetpb.GreetEveryoneRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Haibo",
+				LastName:  "Yan",
+			},
+		},
+		&greetpb.GreetEveryoneRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Tina",
+				LastName:  "Luo",
+			},
+		},
+		&greetpb.GreetEveryoneRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Yan",
+				LastName:  "Li",
+			},
+		},
+		&greetpb.GreetEveryoneRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Zachary",
+				LastName:  "Stephen",
+			},
+		},
+		&greetpb.GreetEveryoneRequest{
+			Greeting: &greetpb.Greeting{
+				FirstName: "Tristan",
+				LastName:  "Timerlake",
+			},
+		},
+	}
+
+	stream, err :=  c.GreetEveryone(context.Background())
+	if err != nil {
+		log.Fatalf(" with error: %v", err)
+	}
+
+	for _, request := range requests {
+		stream.Send(request)
+		resp, err := stream.Recv()
+		if err != nil {
+			log.Fatalf(" with error: %v", err)
+		}
+		fmt.Printf("get response message : '%v'\n", resp.GetResult())
+		time.Sleep(100 * time.Millisecond)
+	}
+
+	stream.CloseSend()
+}
 
 
 func main() {
@@ -116,5 +167,5 @@ func main() {
 
 	c := greetpb.NewGreetServiceClient(conn)
 
-	doClientStreaming(c)
+	doBiDirectional(c)
 }

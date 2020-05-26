@@ -29,7 +29,7 @@ func (*server) GreetManyTimes(req *greetpb.GreetManyTimesRequest, stream greetpb
 	firstName := req.GetGreeting().GetFirstName()
 	for i := 0; i < 10; i++ {
 		result := "Hello " + firstName + " number " + strconv.Itoa(i)
-		response := &greetpb.GrretManyTimesReponse {
+		response := &greetpb.GreetManyTimesResponse {
 			Result: result,
 		}
 		stream.Send(response)
@@ -54,6 +54,26 @@ func (*server) LongGreet(stream greetpb.GreetService_LongGreetServer) error {
 			fmt.Printf("Error happened in recving data: %v\n", err)
 		}
 		result += "\nHello , " + resp.GetGreeting().GetFirstName() + " " + resp.GetGreeting().GetLastName() + " !"
+	}
+
+	return nil
+}
+
+func (*server) GreetEveryone(stream greetpb.GreetService_GreetEveryoneServer) error {
+	fmt.Printf("GreetEveryone is invoked with %v\n", stream)
+
+	for {
+		req, err := stream.Recv()
+		if err == io.EOF {
+			return nil
+		}
+		if err != nil {
+			fmt.Printf("Error happened in recving data: %v\n", err)
+		}
+		resp := &greetpb.GreetEveryoneResponse {
+			Result: "Hi, " + req.GetGreeting().FirstName + " " + req.GetGreeting().GetLastName() + " !",
+		}
+		stream.Send(resp)
 	}
 
 	return nil

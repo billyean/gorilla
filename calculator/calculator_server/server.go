@@ -62,7 +62,6 @@ func (*server)  FibonacciNumber(req *calculatorpb.FibonacciRequest, stream calcu
 	return nil
 }
 
-
 func (*server) Average(stream calculatorpb.CalculateService_AverageServer) error {
 	n := 0
 	sum := int32(0)

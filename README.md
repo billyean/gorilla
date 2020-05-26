@@ -9,3 +9,4 @@ The implementation include
 * [x] Unary API
 * [x] Server Streaming API
 * [x] Client Streaming API
+* [x] Bi-Directional API

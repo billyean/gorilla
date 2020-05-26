@@ -32,9 +32,19 @@ message FibonacciResponse {
   int32 n = 2;
 }
 
+message AverageRequest {
+  int32 number = 1;
+}
+
+message AverageResponse {
+  double average = 1;
+}
+
 service CalculateService{
   // Unary
   rpc Calculate(CalRequest) returns (CalResponse) {};
 
   rpc FibonacciNumber(FibonacciRequest) returns (stream FibonacciResponse) {};
+
+  rpc Average(stream AverageRequest) returns (AverageResponse) {};
 }

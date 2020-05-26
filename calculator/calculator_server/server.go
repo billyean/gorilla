@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/billyean/tornado/calculator/calculatorpb"
 	"google.golang.org/grpc"
+	"io"
 	"log"
 	"net"
 	"time"
@@ -54,6 +55,30 @@ func (*server)  FibonacciNumber(req *calculatorpb.FibonacciRequest, stream calcu
 		secondNumber = result
 	}
 
+	return nil
+}
+
+
+func (*server) Average(stream calculatorpb.CalculateService_AverageServer) error {
+	n := 0
+	sum := int32(0)
+
+	for {
+		req, err := stream.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalf("Error when receiving request: %v\n", err)
+		}
+		n += 1
+		sum += req.GetNumber()
+ 	}
+
+ 	response := &calculatorpb.AverageResponse{
+ 		Average: float64(sum) / float64(n),
+	}
+	stream.SendAndClose(response)
 
 	return nil
 }

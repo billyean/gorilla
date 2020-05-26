@@ -3,3 +3,9 @@ Gorrila is a GRPC service that implemented by GoLang. Current implementation is 
 
 * [x] Greeting Service
 * [x] Calculator Service
+
+The implementation include
+
+* [x] Unary API
+* [x] Server Streaming API
+* [x] Client Streaming API

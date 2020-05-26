@@ -41,7 +41,38 @@ func fibonacci(c calculatorpb.CalculateServiceClient) {
 	}
 }
 
+func doAverage(c calculatorpb.CalculateServiceClient) {
+	requests := []*calculatorpb.AverageRequest{
+		&calculatorpb.AverageRequest {
+			Number: 4,
+		},
+		&calculatorpb.AverageRequest {
+			Number: 2211,
+		},
+		&calculatorpb.AverageRequest {
+			Number: 78234,
+		},
+		&calculatorpb.AverageRequest {
+			Number: 50120,
+		},
+	}
 
+	stream, err :=  c.Average(context.Background())
+	if err != nil {
+		log.Fatal("response with error: %v", err)
+	}
+	for _, request := range requests {
+		err := stream.Send(request)
+		if err != nil {
+			log.Fatal("error happened when Sendin request: %v\n", err)
+		}
+	}
+	resp, err := stream.CloseAndRecv()
+	if err != nil {
+		log.Fatal("error happened when Receiving response: %v\n", err)
+	}
+	fmt.Printf("get average value : %v\n", resp.GetAverage())
+}
 
 func main() {
 	conn, err := grpc.Dial("localhost:50052", grpc.WithInsecure())

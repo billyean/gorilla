@@ -49,7 +49,11 @@ func (*server)  FibonacciNumber(req *calculatorpb.FibonacciRequest, stream calcu
 			Result: result,
 			N: n,
 		}
-		stream.Send(response)
+		err := stream.Send(response)
+		if err != nil {
+			log.Fatalf("Error happened when sending response: %v\n", err)
+			break
+		}
 		time.Sleep(200 * time.Millisecond)
 		firstNumber = secondNumber
 		secondNumber = result
